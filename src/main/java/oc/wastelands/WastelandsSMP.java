@@ -1,11 +1,13 @@
 package oc.wastelands;
 
-import net.fabricmc.api.ModInitializer;
-
-import net.minecraft.util.Identifier;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.util.Identifier;
+
+import oc.wastelands.commands.commandRoot;
 
 public class WastelandsSMP implements ModInitializer {
 	public static final String MOD_ID = "wastelands-smp";
@@ -21,7 +23,11 @@ public class WastelandsSMP implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
-		LOGGER.info("Hello Fabric world!");
+		LOGGER.info("Wastelands SMP mod starting");
+
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+            commandRoot.register(dispatcher);
+        });
 	}
 
 	public static Identifier id(String path) {
