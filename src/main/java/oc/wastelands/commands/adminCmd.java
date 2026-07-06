@@ -8,6 +8,7 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import oc.wastelands.factions.FactionStorage;
 
 public class adminCmd
 {
@@ -21,6 +22,19 @@ public class adminCmd
                 .executes(ctx -> 
                     {
                         ServerPlayerEntity target = EntityArgumentType.getPlayer(ctx, "player");
+                        var storage = FactionStorage.get(ctx.getSource().getServer());
+                        String currentFaction = storage.factionGet(target.getUuid());
+
+                        if(!"none".equals(currentFaction)) // if the player is already in a faction, send an error
+                        {
+                            ctx.getSource().sendError(
+                                Text.literal(target.getName().getString() + " is already in faction: " + currentFaction)
+                            );
+                            return 0;
+                        }
+
+                        storage.factionSet(target.getUuid(), "zephyr");
+
                         ctx.getSource().getServer().getPlayerManager().broadcast((Text.literal(target.getName().getString()).formatted(Formatting.GOLD))
                             .append((Text.literal(" joined the faction: ")).formatted(Formatting.WHITE))
                             .append(Text.literal("Zephyr").formatted(Formatting.AQUA)),
@@ -32,6 +46,19 @@ public class adminCmd
                 .executes(ctx ->
                     {
                         ServerPlayerEntity target = EntityArgumentType.getPlayer(ctx, "player");
+                        var storage = FactionStorage.get(ctx.getSource().getServer());
+                        String currentFaction = storage.factionGet(target.getUuid());
+
+                        if(!"none".equals(currentFaction)) // if the player is already in a faction, send an error
+                        {
+                            ctx.getSource().sendError(
+                                Text.literal(target.getName().getString() + " is already in faction: " + currentFaction)
+                            );
+                            return 0;
+                        }
+
+                        storage.factionSet(target.getUuid(), "terra");
+
                         ctx.getSource().getServer().getPlayerManager().broadcast((Text.literal(target.getName().getString()).formatted(Formatting.GOLD))
                             .append((Text.literal(" joined the faction: ")).formatted(Formatting.WHITE))
                             .append(Text.literal("Terra").formatted(Formatting.DARK_GREEN)),
@@ -46,13 +73,27 @@ public class adminCmd
                 .executes(ctx -> 
                     {   
                         ServerPlayerEntity target = EntityArgumentType.getPlayer(ctx, "player");
+
+                        var storage = FactionStorage.get(ctx.getSource().getServer());
+                        String currentFaction = storage.factionGet(target.getUuid());
+
+                        if("none".equals(currentFaction)) // if the target isn't in a faction send an error
+                        {
+                            ctx.getSource().sendError(
+                                Text.literal(target.getName().getString() + " is not in a faction")
+                            );
+                            return 0;
+                        }
+
+                        storage.factionRemove(target.getUuid());
+
                         ctx.getSource().getServer().getPlayerManager().broadcast((Text.literal(target.getName().getString()).formatted(Formatting.RED))
-                            .append((Text.literal(" has been removed from their faction")).formatted(Formatting.WHITE)),
+                            .append(Text.literal(" has been removed from their faction ").formatted(Formatting.WHITE))
+                            .append(Text.literal(currentFaction).formatted(Formatting.GRAY)),
                             false);
                         return 1;
                     }
-                )
-                )
+                ))
             )
 
         );

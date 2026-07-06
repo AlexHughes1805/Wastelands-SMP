@@ -1,14 +1,22 @@
 package oc.wastelands.factions;
 
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.world.PersistentState;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
+import com.mojang.serialization.Codec;
+
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.world.PersistentState;
 
 public class FactionState extends PersistentState
 {
+    public static final Codec<FactionState> CODEC = Codec.unboundedMap(Codec.STRING, Codec.STRING).xmap(
+        map -> fromMap(map),
+        state -> state.toMap()
+    );
+
     private final Map<UUID, String> factions = new HashMap<>();
 
     public void factionSet(UUID uuid, String faction)
@@ -26,6 +34,26 @@ public class FactionState extends PersistentState
     public String factionGet(UUID uuid)
     {
         return factions.getOrDefault(uuid, "none");
+    }
+
+    private static FactionState fromMap(Map<String, String> map)
+    {
+        FactionState state = new FactionState();
+
+        for (Map.Entry<String, String> entry : map.entrySet())
+        {
+            state.factions.put(UUID.fromString(entry.getKey()), entry.getValue());
+        }
+
+        return state;
+    }
+
+    private Map<String, String> toMap()
+    {
+        return factions.entrySet().stream().collect(Collectors.toMap(
+            entry -> entry.getKey().toString(),
+            entry -> entry.getValue()
+        ));
     }
 
     // save to MC nbt
