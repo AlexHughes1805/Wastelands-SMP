@@ -5,12 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
-
 import oc.wastelands.commands.commandRoot;
-import oc.wastelands.factions.FactionStorage;
 
 public class WastelandsSMP implements ModInitializer {
 	public static final String MOD_ID = "wastelands-smp";

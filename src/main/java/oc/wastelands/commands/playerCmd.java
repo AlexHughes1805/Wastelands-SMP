@@ -18,11 +18,18 @@ public class playerCmd
             .then(CommandManager.argument("player", EntityArgumentType.player())
                 .executes(ctx -> 
                     {
-                        ServerPlayerEntity executor = ctx.getSource().getPlayer();
+                        var source = ctx.getSource();
+                        ServerPlayerEntity executor = source.getEntity() instanceof ServerPlayerEntity player ? player : null;
                         ServerPlayerEntity target = EntityArgumentType.getPlayer(ctx, "player");
 
-                        var storage = FactionStorage.get(ctx.getSource().getServer());
+                        var storage = FactionStorage.get(source.getServer());
                         String currentFaction = storage.factionGet(target.getUuid());
+
+                        if(executor == null) // if run from the server console
+                        {
+                                source.sendFeedback(() -> Text.literal("This command must be run by a player"), false);
+                            return 0;
+                        }
 
                         if("none".equals(currentFaction)) // if the player is not in a faction
                         {
@@ -34,7 +41,7 @@ public class playerCmd
 
                         if(target == executor) // if the player checks their own faction
                         {
-                            if(currentFaction == "Zephyr")
+                            if("Zephyr".equalsIgnoreCase(currentFaction))
                             {
                                 executor.sendMessage(
                                     (Text.literal("You are in faction ").formatted(Formatting.WHITE))
@@ -42,7 +49,7 @@ public class playerCmd
                                 );
                                 return 1;
                             }
-                            else if(currentFaction == "Terra")
+                            else if("Terra".equalsIgnoreCase(currentFaction))
                             {
                                 executor.sendMessage(
                                     (Text.literal("You are in faction: ").formatted(Formatting.WHITE))
@@ -52,7 +59,7 @@ public class playerCmd
                             }
                         }
 
-                        if(currentFaction == "Zephyr")
+                        if("Zephyr".equalsIgnoreCase(currentFaction))
                         {
                             executor.sendMessage(
                                 (Text.literal(target.getName().getString()).formatted(Formatting.GOLD))
@@ -61,7 +68,7 @@ public class playerCmd
                             );
                             return 1;
                         }
-                        else if(currentFaction == "Terra")
+                        else if("Terra".equalsIgnoreCase(currentFaction))
                         {
                             executor.sendMessage(
                                 (Text.literal(target.getName().getString()).formatted(Formatting.GOLD))
