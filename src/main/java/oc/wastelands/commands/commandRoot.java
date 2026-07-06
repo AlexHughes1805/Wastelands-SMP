@@ -12,6 +12,7 @@ public class commandRoot
         var root = CommandManager.literal("oc"); // requires /oc to initiate any commands in this mod
 
         adminCmd.attach(root);
+        playerCmd.attach(root);
 
         dispatcher.register(root);
     }

@@ -23,6 +23,13 @@ loom {
 			sourceSet sourceSets.client
 		}
 	}
+
+	runs {
+        client {
+            programArgs "--username=AlexDev"
+			vmArgs "-Dfml.noSecureProfile=true"
+        }
+    }
 }
 
 dependencies {

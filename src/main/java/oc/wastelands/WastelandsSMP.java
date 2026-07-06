@@ -5,9 +5,12 @@ import org.slf4j.LoggerFactory;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
 import oc.wastelands.commands.commandRoot;
+import oc.wastelands.factions.FactionStorage;
 
 public class WastelandsSMP implements ModInitializer {
 	public static final String MOD_ID = "wastelands-smp";
@@ -25,9 +28,13 @@ public class WastelandsSMP implements ModInitializer {
 
 		LOGGER.info("Wastelands SMP mod starting");
 
-		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+		// initialise commands
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
+		{
             commandRoot.register(dispatcher);
         });
+
+		oc.wastelands.events.playerEvents.register(); // refresh player list when Minecraft is initialised
 	}
 
 	public static Identifier id(String path) {

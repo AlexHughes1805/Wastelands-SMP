@@ -33,12 +33,13 @@ public class adminCmd
                             return 0;
                         }
 
-                        storage.factionSet(target.getUuid(), "zephyr");
+                        storage.factionSet(target.getUuid(), "Zephyr");
 
                         ctx.getSource().getServer().getPlayerManager().broadcast((Text.literal(target.getName().getString()).formatted(Formatting.GOLD))
                             .append((Text.literal(" joined the faction: ")).formatted(Formatting.WHITE))
                             .append(Text.literal("Zephyr").formatted(Formatting.AQUA)),
                             false);
+                        FactionStorage.refreshPlayerListName(ctx.getSource().getServer(), target);
                         return 1;
                     }
                 ))
@@ -57,12 +58,14 @@ public class adminCmd
                             return 0;
                         }
 
-                        storage.factionSet(target.getUuid(), "terra");
+                        storage.factionSet(target.getUuid(), "Terra");
 
                         ctx.getSource().getServer().getPlayerManager().broadcast((Text.literal(target.getName().getString()).formatted(Formatting.GOLD))
                             .append((Text.literal(" joined the faction: ")).formatted(Formatting.WHITE))
                             .append(Text.literal("Terra").formatted(Formatting.DARK_GREEN)),
                         false);
+
+                        FactionStorage.refreshPlayerListName(ctx.getSource().getServer(), target);
                         return 1;
                     }
                 )))
@@ -91,6 +94,8 @@ public class adminCmd
                             .append(Text.literal(" has been removed from their faction ").formatted(Formatting.WHITE))
                             .append(Text.literal(currentFaction).formatted(Formatting.GRAY)),
                             false);
+
+                        FactionStorage.refreshPlayerListName(ctx.getSource().getServer(), target);
                         return 1;
                     }
                 ))
