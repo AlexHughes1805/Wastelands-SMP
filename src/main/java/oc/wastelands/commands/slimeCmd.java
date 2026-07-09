@@ -3,14 +3,12 @@ package oc.wastelands.commands;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 
-import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.network.packet.s2c.play.EntityTrackerUpdateS2CPacket;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import oc.wastelands.factions.FactionStorage;
+
 import oc.wastelands.species.SpeciesState;
 import oc.wastelands.species.SpeciesStorage;
 
@@ -20,7 +18,7 @@ public class slimeCmd
     {
         root.then(CommandManager.literal("slime")
             .then(CommandManager.literal("changeSize")
-                .then(CommandManager.argument("value", FloatArgumentType.floatArg(0.1F, 10.0F))
+                .then(CommandManager.argument("value", FloatArgumentType.floatArg(0.1F, 3.0F))
                     .executes(ctx ->
                     {
                         var source = ctx.getSource();

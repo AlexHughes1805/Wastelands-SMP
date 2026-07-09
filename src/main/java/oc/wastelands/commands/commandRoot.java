@@ -14,6 +14,7 @@ public class commandRoot
         adminCmd.attach(root);
         playerCmd.attach(root);
         slimeCmd.attach(root);
+        humanCmd.attach(root);
 
         dispatcher.register(root);
     }
