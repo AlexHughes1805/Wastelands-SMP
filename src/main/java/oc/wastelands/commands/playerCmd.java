@@ -8,7 +8,6 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-
 import oc.wastelands.factions.FactionStorage;
 import oc.wastelands.species.SpeciesStorage;
 
@@ -114,8 +113,8 @@ public class playerCmd
                     }
                 )
             )
-        .then(CommandManager.literal("slimekind")
-            .executes(ctx ->
+            .then(CommandManager.literal("slimekind")
+                .executes(ctx ->
                     {
                         var source = ctx.getSource();
                         ServerPlayerEntity executor = source.getEntity() instanceof ServerPlayerEntity player ? player : null;
@@ -141,8 +140,8 @@ public class playerCmd
                     }
                 )
             )
-        .then(CommandManager.literal("elytrian")
-            .executes(ctx ->
+            .then(CommandManager.literal("elytrian")
+                .executes(ctx ->
                     {
                         var source = ctx.getSource();
                         ServerPlayerEntity executor = source.getEntity() instanceof ServerPlayerEntity player ? player : null;
@@ -168,8 +167,8 @@ public class playerCmd
                     }
                 )
             )
-        .then(CommandManager.literal("mammalfolk")
-            .executes(ctx ->
+            .then(CommandManager.literal("mammalfolk")
+                .executes(ctx ->
                     {
                         var source = ctx.getSource();
                         ServerPlayerEntity executor = source.getEntity() instanceof ServerPlayerEntity player ? player : null;

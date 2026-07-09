@@ -2,7 +2,6 @@ package oc.wastelands.augments;
 
 import net.minecraft.datafixer.DataFixTypes;
 import net.minecraft.world.PersistentStateType;
-import oc.wastelands.augments.AugmentState;
 
 public class AugmentStateType
 {
