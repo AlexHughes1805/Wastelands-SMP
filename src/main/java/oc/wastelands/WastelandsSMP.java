@@ -17,7 +17,8 @@ public class WastelandsSMP implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
-	public void onInitialize() {
+	public void onInitialize()
+	{
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
@@ -30,10 +31,11 @@ public class WastelandsSMP implements ModInitializer {
             commandRoot.register(dispatcher);
         });
 
-		oc.wastelands.events.playerEvents.register(); // refresh player list when Minecraft is initialised
+		oc.wastelands.events.playerEvents.register(); // refresh when Minecraft is initialised
 	}
 
-	public static Identifier id(String path) {
+	public static Identifier id(String path)
+	{
 		return Identifier.of(MOD_ID, path);
 	}
 }

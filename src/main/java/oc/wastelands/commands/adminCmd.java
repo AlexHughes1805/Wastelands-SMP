@@ -37,7 +37,7 @@ public class adminCmd
 
                         ctx.getSource().getServer().getPlayerManager().broadcast((Text.literal(target.getName().getString()).formatted(Formatting.GOLD))
                             .append((Text.literal(" joined the faction: ")).formatted(Formatting.WHITE))
-                            .append(Text.literal("Zephyr").formatted(Formatting.AQUA)),
+                            .append(Text.literal("Zephyr").formatted(Formatting.AQUA, Formatting.UNDERLINE)),
                             false);
                         FactionStorage.refreshPlayerListName(ctx.getSource().getServer(), target);
                         return 1;
@@ -62,7 +62,7 @@ public class adminCmd
 
                         ctx.getSource().getServer().getPlayerManager().broadcast((Text.literal(target.getName().getString()).formatted(Formatting.GOLD))
                             .append((Text.literal(" joined the faction: ")).formatted(Formatting.WHITE))
-                            .append(Text.literal("Terra").formatted(Formatting.DARK_GREEN)),
+                            .append(Text.literal("Terra").formatted(Formatting.DARK_GREEN, Formatting.UNDERLINE)),
                         false);
 
                         FactionStorage.refreshPlayerListName(ctx.getSource().getServer(), target);
@@ -90,9 +90,9 @@ public class adminCmd
 
                         storage.factionRemove(target.getUuid());
 
-                        ctx.getSource().getServer().getPlayerManager().broadcast((Text.literal(target.getName().getString()).formatted(Formatting.RED))
-                            .append(Text.literal(" has been removed from their faction ").formatted(Formatting.WHITE))
-                            .append(Text.literal(currentFaction).formatted(Formatting.GRAY)),
+                        ctx.getSource().getServer().getPlayerManager().broadcast((Text.literal(target.getName().getString()).formatted(Formatting.AQUA))
+                            .append(Text.literal(" has been removed from the faction: ").formatted(Formatting.WHITE))
+                            .append(Text.literal(currentFaction).formatted(Formatting.RED, Formatting.UNDERLINE)),
                             false);
 
                         FactionStorage.refreshPlayerListName(ctx.getSource().getServer(), target);

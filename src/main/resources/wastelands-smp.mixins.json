@@ -3,7 +3,9 @@
 	"package": "oc.wastelands.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ServerPlayerEntityMixin"
+		"ServerPlayerEntityMixin",
+		"PlayerEntityMixin",
+		"LivingEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
