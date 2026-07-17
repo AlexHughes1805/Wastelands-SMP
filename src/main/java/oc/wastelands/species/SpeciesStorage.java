@@ -6,13 +6,15 @@ import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-
+import net.minecraft.entity.player.PlayerEntity;
 
 public class SpeciesStorage
 {
+    
     public static SpeciesState get(MinecraftServer server)
     {
         return Objects.requireNonNull(server.getWorld(World.OVERWORLD))
@@ -55,7 +57,7 @@ public class SpeciesStorage
         Species species = getSpeciesObj(player);
         
         // flying
-        player.getAbilities().allowFlying = species.canFly;
+        //player.getAbilities().allowFlying = species.canFly;
         player.sendAbilitiesUpdate();
 
         //nightvision

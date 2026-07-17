@@ -7,9 +7,10 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+import oc.wastelands.augments.Augment;
+import oc.wastelands.augments.AugmentStorage;
 import oc.wastelands.factions.FactionStorage;
 import oc.wastelands.species.Species;
-import oc.wastelands.species.SpeciesState;
 import oc.wastelands.species.SpeciesStorage;
 
 public class playerEvents {
@@ -39,8 +40,9 @@ public class playerEvents {
             if (!(entity instanceof ServerPlayerEntity player)) return true;
 
             Species species = SpeciesStorage.getSpeciesObj(player);
+            Augment augment = AugmentStorage.getAugmentObj(player);
 
-            if (species.noFallDamage && source.isIn(DamageTypeTags.IS_FALL))
+            if ((species.noFallDamage || augment.noFallDamage) && source.isIn(DamageTypeTags.IS_FALL))
             {
                 return false;
             }

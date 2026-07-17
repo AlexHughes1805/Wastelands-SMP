@@ -3,7 +3,6 @@ package oc.wastelands.species;
 
 public class Species
 {
-    public final boolean canFly;
     public final boolean nightVision;
 
     // slime abilities
@@ -17,7 +16,6 @@ public class Species
 
     public Species
     (
-        boolean canFly,
         boolean nightVision,
         boolean noFallDamage,
         boolean slowHunger,
@@ -27,7 +25,6 @@ public class Species
         double jumpMultiplier
     )
     {
-        this.canFly = canFly;
         this.nightVision = nightVision;
         this.noFallDamage = noFallDamage;
         this.slowHunger = slowHunger;

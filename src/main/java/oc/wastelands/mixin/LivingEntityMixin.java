@@ -4,6 +4,9 @@ import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
+
+import oc.wastelands.augments.Augment;
+import oc.wastelands.augments.AugmentStorage;
 import oc.wastelands.species.Species;
 import oc.wastelands.species.SpeciesState;
 import oc.wastelands.species.SpeciesStorage;
@@ -50,7 +53,8 @@ public class LivingEntityMixin
         ),
         index = 0
     )
-    private float wastelands$modifyDamage(float originalDamage) {
+    private float wastelands$modifyDamage(float originalDamage)
+    {
         LivingEntity entity = (LivingEntity)(Object)this;
 
         if (!(entity instanceof ServerPlayerEntity player)) {
@@ -58,7 +62,17 @@ public class LivingEntityMixin
         }
 
         Species species = SpeciesStorage.getSpeciesObj(player);
+        Augment augment = AugmentStorage.getAugmentObj(player);
+        String playerSpecies = SpeciesStorage.speciesGet(player);
+        String playerAugment = AugmentStorage.augmentGet(player);
 
-        return originalDamage * (float) species.damageMultiplier;
+        float damage = originalDamage * (float)species.damageMultiplier;
+
+        if(playerSpecies == "human" && playerAugment == "reducedDamage")
+        {
+            damage *= augment.damageMultiplier;
+        }
+
+        return damage;
     }
 }

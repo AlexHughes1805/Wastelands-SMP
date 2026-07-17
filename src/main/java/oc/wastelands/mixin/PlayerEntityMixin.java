@@ -2,7 +2,8 @@ package oc.wastelands.mixin;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
-
+import oc.wastelands.augments.Augment;
+import oc.wastelands.augments.AugmentStorage;
 import oc.wastelands.species.Species;
 import oc.wastelands.species.SpeciesStorage;
 
@@ -26,8 +27,9 @@ public class PlayerEntityMixin
         }
 
         Species species = SpeciesStorage.getSpeciesObj(player);
+        Augment augment = AugmentStorage.getAugmentObj(player);
 
-        if (species.slowHunger)
+        if (species.slowHunger || augment.slowHunger)
         {
             float slowed = exhaustionAmount * 0.5F;
             player.getHungerManager().addExhaustion(slowed);

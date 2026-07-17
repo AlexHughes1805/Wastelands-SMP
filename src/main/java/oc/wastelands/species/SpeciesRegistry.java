@@ -14,7 +14,6 @@ public class SpeciesRegistry
             false,
             false,
             false,
-            false,
             1.0F,
             1.0,
             1.0,
@@ -22,9 +21,8 @@ public class SpeciesRegistry
         ));
 
         SPECIES.put("elytrian", new Species(
-            true, 
             false,
-            false,
+            true,
             false,
             1.0F,
             1.0,
@@ -33,7 +31,6 @@ public class SpeciesRegistry
         ));
 
         SPECIES.put("slimekind", new Species(
-            false,
             false,
             true,
             true,
@@ -44,7 +41,6 @@ public class SpeciesRegistry
         ));
 
         SPECIES.put("mammalfolk", new Species(
-            false,
             false,
             false,
             false,
